@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
        
-            Schema::create('progressions', function (Blueprint $table) {
+            Schema::create('progresses', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('user_id');
                 $table->string('title');
                 $table->float('weight')->nullable();
                 $table->json('measurements')->nullable();  
                 $table->text('performance')->nullable();
-                $table->enum('status', ['Non terminé', 'Terminé']);  
+                $table->enum('status', ['Non terminé', 'Terminé'])->default('Non terminé');
+
                 $table->string('slug')->unique();
                 $table->timestamps();
     
