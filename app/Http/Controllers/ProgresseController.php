@@ -23,12 +23,11 @@ class ProgresseController extends Controller
     public function destroy(int $id)
     {
         $progress = Progresse::findOrFail($id);
-
-        // if ($progress->user_id !== auth()->user()->id) {
-        //     return response()->json([
-        //         'status' => 403,
-        //         'message' => 'Accès non autorisé',
-        //     ], 403);
+        if ($progress->user_id !== auth()->user()->id) {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Accès non autorisé',
+            ], 403);
         
 
         $progress->delete();
@@ -38,6 +37,10 @@ class ProgresseController extends Controller
             'message' => 'Entrée supprimée avec succès',
         ]);
     }
+    }
+
+    
+    
      public function store(Request $request)
     {
        
@@ -49,7 +52,7 @@ class ProgresseController extends Controller
                 'user_id' =>'nullable',
             ]);
             $validatedData['status'] = 'Non terminé';
-            // $validatedData['user_id'] = auth()->id();
+            $validatedData['user_id'] = auth()->id();
 
             $progress = Progresse::create($validatedData);
 
@@ -70,12 +73,12 @@ class ProgresseController extends Controller
             'measurements' => 'nullable|json', 
             'performance' => 'nullable|string',
         ]);
-        // if ($progress->user_id !== Auth::id()) {
-        //     return response()->json([
-        //         'status' => 403,
-        //         'message' => 'Accès non autorisé',
-        //     ], 403);
-        // }
+        if ($progress->user_id !== Auth::id()) {
+            return response()->json([
+                'status' => 403,
+                'message' => 'Accès non autorisé',
+            ], 403);
+        }
         $progress->update($validatedData);
     
         return response()->json([
@@ -84,6 +87,7 @@ class ProgresseController extends Controller
             'progress' => $progress,
         ]);
     }
+    
 
     public function updateStatus(Request $request, Progresse $progress)
 {
