@@ -13,16 +13,17 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/progresses/{progress}/status', [ProgresseController::class, 'updateStatus']);
     Route::prefix('/progress')->group(function () {
-        Route::get('/', [ProgresseController::class, 'index']); 
+        Route::get('/my-progress', [ProgresseController::class, 'index']); 
         Route::post('/', [ProgresseController::class, 'store']); 
         Route::delete('/{id}', [ProgresseController::class, 'destroy']); 
         Route::put('/{progress}', [ProgresseController::class, 'update']);
         Route::patch('/{progress}/status', [ProgresseController::class, 'updateStatus']);
+        Route::post('/logout', [UserController::class, 'logout']);
     
+});
 });
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
-});
 
 
 

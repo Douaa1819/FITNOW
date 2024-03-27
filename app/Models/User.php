@@ -13,7 +13,6 @@ use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 
 class User extends Authenticatable
 {
-
     use HasFactory, Notifiable,SanctumHasApiTokens;
 
     public function progress()
