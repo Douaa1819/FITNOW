@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class Progresse extends Model
 {
 
- use HasFactory;
+ use HasFactory,RefreshDatabase;
 
  protected $fillable = [
  'user_id',

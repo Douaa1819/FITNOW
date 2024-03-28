@@ -28,7 +28,7 @@ class ProgresseController extends Controller
                 'status' => 403,
                 'message' => 'Accès non autorisé',
             ], 403);
-
+        }
 
             $progress->delete();
 
@@ -37,7 +37,9 @@ class ProgresseController extends Controller
                 'message' => 'Entrée supprimée avec succès',
             ]);
         }
-    }
+    
+
+
 
 
     public function store(Request $request)

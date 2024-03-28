@@ -9,9 +9,11 @@ use App\Http\Controllers\UserController;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
+Route::post('/test-protected', function () {
+    return response()->json(['message' => 'This is a protected route']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::patch('/progresses/{progress}/status', [ProgresseController::class, 'updateStatus']);
     Route::prefix('/progress')->group(function () {
         Route::get('/my-progress', [ProgresseController::class, 'index']); 
         Route::post('/', [ProgresseController::class, 'store']); 

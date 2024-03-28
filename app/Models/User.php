@@ -6,6 +6,7 @@ use App\Models\Progresse;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Prompts\Progress;
 use Laravel\Passport\HasApiTokens;
@@ -13,8 +14,12 @@ use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,SanctumHasApiTokens;
-
+    use HasFactory, Notifiable,SanctumHasApiTokens ;
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
     public function progress()
     {
         return $this->hasMany(Progress::class);
@@ -25,11 +30,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+
 
     /**
      * The attributes that should be hidden for serialization.

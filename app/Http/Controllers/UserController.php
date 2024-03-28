@@ -61,8 +61,8 @@ class UserController extends Controller
 
     public function logout()
     {
-        $user = User::find(Auth::id());
-        $user->tokens()->delete();
+        /** @disregard P1013 [tokens function exists and working] **/
+        auth()->user()->tokens()->delete();
 
         return [
             'message' => 'logged out'
