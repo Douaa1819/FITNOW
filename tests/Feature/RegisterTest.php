@@ -45,12 +45,9 @@ it('allows a user to log in', function () {
 
 it('allows a user to logout', function () {
     $user = User::factory()->create();
-    $token = $user->createToken('TestToken')->plainTextToken;
-    $response = $this->withHeaders([
-        'Authorization' => 'Bearer ' . $token,
-    ])->postJson('/api/progress/logout');
-
-    $response->assertStatus(200)
+    $this->actingAs($user);
+    $response=$this->postJson('/api/progress/logout')
+           ->assertStatus(200)
              ->assertJson([
                  'message' => 'logged out',
              ]);
